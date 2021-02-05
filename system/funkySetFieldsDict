@@ -1,0 +1,32 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      funkySetFieldsDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+expressions
+(
+	setfluid_light
+	{
+		field alpha.fluid_light;
+        //condition "pos().y < -0.1*sin(pi*pos().x)+2";
+        condition "pos().y < 2-0.2*tanh(pos().y-2-cos(2*pi*pos().x))";
+		expression "1";
+		keepPatches true;
+	}
+); 
+
+// 2-tanh(y-2-cos(2+pi*x))
+
+// ************************************************************************* //
